@@ -1,0 +1,104 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="248"/>
+    <ColumnDefinition Width="*"/>
+  </Grid.ColumnDefinitions>
+
+  <!-- left: device summary + second-level menu -->
+  <DockPanel Margin="20,6,4,22">
+    <Border DockPanel.Dock="Top" Style="{StaticResource Card}" Padding="18">
+      <StackPanel>
+        <Border x:Name="DevGlyph" Width="46" Height="46" CornerRadius="13" Background="{DynamicResource AccentSoft}" HorizontalAlignment="Left"/>
+        <TextBlock x:Name="DevName" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource Text}" Margin="0,14,0,0" TextTrimming="CharacterEllipsis"/>
+        <TextBlock x:Name="DevSub" Style="{StaticResource Hint}" Margin="0,4,0,0"/>
+        <Grid x:Name="BatteryRow" Margin="0,14,0,0">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+          </Grid.ColumnDefinitions>
+          <Border x:Name="BatteryTrack" Height="6" CornerRadius="3" Background="{DynamicResource Surface2}" VerticalAlignment="Center">
+            <Border x:Name="BatteryFill" HorizontalAlignment="Left" CornerRadius="3" Background="{DynamicResource Good}"/>
+          </Border>
+          <TextBlock x:Name="BatteryText" Grid.Column="1" Style="{StaticResource Hint}" Margin="10,0,0,0" VerticalAlignment="Center"/>
+        </Grid>
+      </StackPanel>
+    </Border>
+
+    <StackPanel x:Name="Nav" DockPanel.Dock="Top" Margin="0,18,0,0">
+      <RadioButton x:Name="NavPerf" Style="{StaticResource NavItem}" GroupName="nav" Tag="perf">
+        <StackPanel Orientation="Horizontal">
+          <Path Style="{StaticResource NavIcon}" Data="M4,17 A8,8 0 1 1 20,17 M12,13 L15.5,8.5 M12,13 A0.5,0.5 0 1 0 12,13.01"/>
+          <TextBlock Text="{DynamicResource L_Perf}" Margin="12,0,0,0" VerticalAlignment="Center"/>
+        </StackPanel>
+      </RadioButton>
+      <RadioButton x:Name="NavButtons" Style="{StaticResource NavItem}" GroupName="nav" Tag="buttons">
+        <StackPanel Orientation="Horizontal">
+          <Path Style="{StaticResource NavIcon}" Data="M12,3 A6,6 0 0 0 6,9 V15 A6,6 0 0 0 18,15 V9 A6,6 0 0 0 12,3 Z M12,7 V10"/>
+          <TextBlock Text="{DynamicResource L_Buttons}" Margin="12,0,0,0" VerticalAlignment="Center"/>
+        </StackPanel>
+      </RadioButton>
+      <RadioButton x:Name="NavLight" Style="{StaticResource NavItem}" GroupName="nav" Tag="light" Visibility="Collapsed">
+        <StackPanel Orientation="Horizontal">
+          <Path Style="{StaticResource NavIcon}" Data="M9,18 H15 M10,21 H14 M12,3 A6,6 0 0 0 8,13.5 C8.8,14.3 9,15 9,16 H15 C15,15 15.2,14.3 16,13.5 A6,6 0 0 0 12,3 Z"/>
+          <TextBlock Text="{DynamicResource L_Light}" Margin="12,0,0,0" VerticalAlignment="Center"/>
+        </StackPanel>
+      </RadioButton>
+      <RadioButton x:Name="NavProfiles" Style="{StaticResource NavItem}" GroupName="nav" Tag="profiles">
+        <StackPanel Orientation="Horizontal">
+          <Path Style="{StaticResource NavIcon}" Data="M12,3 L21,8 L12,13 L3,8 Z M3,12.5 L12,17.5 L21,12.5 M3,17 L12,22 L21,17"/>
+          <TextBlock Text="{DynamicResource L_Profiles}" Margin="12,0,0,0" VerticalAlignment="Center"/>
+        </StackPanel>
+      </RadioButton>
+      <RadioButton x:Name="NavInfo" Style="{StaticResource NavItem}" GroupName="nav" Tag="info">
+        <StackPanel Orientation="Horizontal">
+          <Path Style="{StaticResource NavIcon}" Data="M12,2 A10,10 0 1 1 11.99,2 Z M12,11 V17 M12,7.5 V7.6"/>
+          <TextBlock Text="{DynamicResource L_Info}" Margin="12,0,0,0" VerticalAlignment="Center"/>
+        </StackPanel>
+      </RadioButton>
+    </StackPanel>
+    <TextBlock x:Name="NavFoot" DockPanel.Dock="Bottom" Style="{StaticResource Hint}" VerticalAlignment="Bottom" TextWrapping="Wrap" Margin="14,0,0,0"/>
+  </DockPanel>
+
+  <!-- right: section content -->
+  <Grid Grid.Column="1">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <DockPanel Margin="28,8,40,20">
+      <StackPanel x:Name="ProfileBar" DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center"/>
+      <StackPanel>
+        <TextBlock x:Name="SectionTitle" Style="{StaticResource H1}"/>
+        <TextBlock x:Name="SectionSub" Style="{StaticResource Hint}" FontSize="13" Margin="0,6,0,0"/>
+      </StackPanel>
+    </DockPanel>
+
+    <Border Grid.Row="1" x:Name="Banner" Visibility="Collapsed" Margin="28,0,40,16" CornerRadius="12"
+            Background="{DynamicResource AmberSoft}" Padding="18,10">
+      <DockPanel>
+        <Button x:Name="BannerBtn" DockPanel.Dock="Right" Style="{StaticResource Ghost}" Margin="12,0,0,0"/>
+        <TextBlock x:Name="BannerText" Foreground="{DynamicResource Amber}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+      </DockPanel>
+    </Border>
+
+    <ScrollViewer Grid.Row="2" x:Name="SectionScroll" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+      <ContentControl x:Name="SectionHost" Margin="28,0,40,24" Focusable="False"/>
+    </ScrollViewer>
+
+    <Border Grid.Row="3" x:Name="SaveBar" Visibility="Collapsed" Margin="28,0,40,22" CornerRadius="14"
+            Background="{DynamicResource Surface}" BorderBrush="{DynamicResource Line}" BorderThickness="1" Padding="20,10,10,10">
+      <DockPanel>
+        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+          <Button x:Name="BtnRevert" Style="{StaticResource Ghost}" Content="{DynamicResource L_Revert}"/>
+          <Button x:Name="BtnSave" Style="{StaticResource Primary}" Content="{DynamicResource L_Save}" Margin="8,0,0,0"/>
+        </StackPanel>
+        <Ellipse x:Name="SaveDot" Width="8" Height="8" Fill="{DynamicResource Amber}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+        <TextBlock x:Name="SaveText" VerticalAlignment="Center" Foreground="{DynamicResource Text}" TextTrimming="CharacterEllipsis"/>
+      </DockPanel>
+    </Border>
+  </Grid>
+</Grid>

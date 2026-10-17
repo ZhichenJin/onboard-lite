@@ -1,0 +1,7 @@
+# build output (binaries are published as GitHub Releases)
+*.exe
+*.zip
+*.pdb
+
+# sector dumps used by the debug tools
+*.bin
